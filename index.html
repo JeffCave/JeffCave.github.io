@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+    <style>
+        body{
+            display:flex;
+            font-size:5em;
+            align-items:center;
+            justify-content:center;
+        }
+        ol{
+            list-style:none;
+        }
+        li{
+            display:inline;
+            opacity:0;
+            transition: opacity 1s;
+        }
+        li.visible{
+            opacity:1;
+            transition: opacity 1s;
+        }
+        a {
+            color: inherit; /* blue colors for links too */
+            text-decoration: inherit; /* no underline */
+        }
+    </style>
+  </head>
+  <body>
+    <ol>
+      <li><i class="fab fa-github"></i></li>
+      <li>&#10132;</li>
+      <li><a href="//jefferey-cave.gitlab.io/"><i class="fab fa-gitlab"></i></a></li>
+    </ol>
+    <script>
+        const d1 = document;
+        const time = 10000;
+        const items = Array.from(d1.querySelectorAll('ol li')).reverse();
+        
+        
+        function processTimer(){
+            ticks--;
+            if(ticks <= 0){
+                clearInterval(interval);
+                d1.location = d1.querySelector('a').getAttribute('href');
+                return;
+            }
+            let item = ticks%items.length;
+            items[item].classList.toggle('visible');
+        }
+        
+        let ticks = items.length * 2;
+        let interval = setInterval(processTimer,time/ticks);
+    </script>
+  </body>
+</html>
